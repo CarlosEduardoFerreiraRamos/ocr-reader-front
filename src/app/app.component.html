@@ -6,7 +6,8 @@
 
 <input type="file" (change)="onFileChanged($event)">
 <br>
-<button>READ IMAGE</button>
+<button>READ FILE IMAGE</button>
+<button (click)="onReadUrlImage()">READ URL IMAGE</button>
 <h2>Words found: </h2>
 <ul>
   <li *ngFor="let line of rows">
