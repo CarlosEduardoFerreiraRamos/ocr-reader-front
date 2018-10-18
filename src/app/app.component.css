@@ -1,0 +1,8 @@
+.image-diplay-container {
+    display: inline-block;
+    min-height: 300px;
+}
+
+.text-find-container {
+    text-align: start;
+}

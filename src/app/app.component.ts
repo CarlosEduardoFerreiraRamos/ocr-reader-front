@@ -14,23 +14,21 @@ export class AppComponent {
 
   rows: [string];
 
-  file: FileReader;
+  file: any;
 
   answer: any;
 
   url: string | ArrayBuffer;
 
   public onFileChanged(eventd) {
-    console.log('file: ', eventd)
     const reader = new FileReader();
 
     reader.onload = (event: ProgressEvent) => {
       this.url = (<FileReader>event.target).result;
-    }
+    };
 
-    reader.readAsDataURL(eventd.target.files[0])
-    console.log('reader: ', reader)
-    this.file = reader;
+    this.file = eventd.target.files[0];
+    reader.readAsDataURL(this.file);
   }
 
   public onReadUrlImage(): void {
@@ -38,10 +36,13 @@ export class AppComponent {
       this.answer = res;
       this.rows = res.ParsedResults.map( obj => obj.ParsedText);
       this.url = 'http://i.imgur.com/fwxooMv.png';
-    })
+    });
   }
 
   public onReadFIleImage(): void {
-    this._ocrService.readFileImage(this.file).subscribe( res => this.answer);
+    this._ocrService.readFileImage(this.file).subscribe( res => {
+      this.answer = res;
+      this.rows = res.ParsedResults.map( obj => obj.ParsedText);
+    });
   }
 }
